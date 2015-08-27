@@ -25,7 +25,7 @@ public class controllerCurrency {
         JSONObject js = new JSONObject();
         {
 
-            js.put("result", doltoeur.dte(d));
+            js.put("result", doltoeur.calculateEur(d));
 
             return Response.status(200).entity(js.toString()).build();
         }

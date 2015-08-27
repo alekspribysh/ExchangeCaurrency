@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 @Path("/converter")
 public class controllerCurrency {
 
-    Currency doltoeur = new Currency();
+    Currency cur = new Currency();
 
     @Path("dte/{d}")
     @GET
@@ -25,7 +25,7 @@ public class controllerCurrency {
         JSONObject js = new JSONObject();
         {
 
-            js.put("result", doltoeur.calculateEur(d));
+            js.put("result", cur.calculateEur(d));
 
             return Response.status(200).entity(js.toString()).build();
         }

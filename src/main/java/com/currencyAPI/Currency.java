@@ -45,7 +45,7 @@ public class Currency {
         output = response.getEntity(String.class);
         obj = new JSONObject(output).getJSONObject("rates");
         rates = Math.round( obj.getDouble("EUR") * 100.0) / 100.0;
-        System.out.println(rates + 0);
+       // System.out.println(rates + 0);
 
         return rates;
     }

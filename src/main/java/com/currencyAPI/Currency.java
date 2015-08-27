@@ -29,20 +29,22 @@ public class Currency {
         return eur;
     }
 
+    Client client = Client.create();
+    WebResource webResource;
+    ClientResponse response;
+    //String output;
+
     @Test
     public void dolltoeur (){
 
 
-            Client client = Client.create();
-
-            WebResource webResource = client.resource("http://api.fixer.io/latest?base=USD");
-
-            ClientResponse response = webResource.accept("application/json").get(ClientResponse.class);
-           // String output = response.getEntity(String.class);
-            JSONObject object = new JSONObject(response);
+            webResource = client.resource("http://api.fixer.io/latest?base=USD");
+            response = webResource.accept("application/json").get(ClientResponse.class);
+            String output = response.getEntity(String.class);
+            JSONObject object = new JSONObject(output);
             object = (JSONObject) object.get("rates");
-            double d = object.getDouble("EUR");
-            System.out.println(d);
+            double d = Math.round( object.getDouble("EUR") * 100.0) / 100.0;
+            System.out.println(d +0);
 
 
 

@@ -1,6 +1,6 @@
 package com.controller;
 
-
+import com.currencyAPI.Currency;
 import org.json.JSONObject;
 
 import javax.ws.rs.GET;
@@ -15,25 +15,21 @@ import javax.ws.rs.core.Response;
 @Path("/converter")
 public class controllerCurrency {
 
+    Currency doltoeur = new Currency();
 
-    @Path("{/d}")
+    @Path("dte/{d}")
     @GET
     @Produces("application/json")
-    public Response converter(@PathParam("d") int d) {
-        double doll = d;
-        double eur;
+    public Response converter(@PathParam("d") double d) {
 
-        eur = d * 0.8;
         JSONObject js = new JSONObject();
         {
 
-            js.put("euro", eur);
-            js.put("dollars", d);
+            js.put("result", doltoeur.dte(d));
 
             return Response.status(200).entity(js.toString()).build();
         }
     }
-
 
 
 }

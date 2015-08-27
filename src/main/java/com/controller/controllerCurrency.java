@@ -15,17 +15,31 @@ import javax.ws.rs.core.Response;
 @Path("/converter")
 public class controllerCurrency {
 
-    Currency doltoeur = new Currency();
+    private Currency cur = new Currency();
+    private JSONObject js = new JSONObject();
+    private String url;
 
     @Path("dte/{d}")
     @GET
     @Produces("application/json")
-    public Response converter(@PathParam("d") double d) {
+    public Response dte(@PathParam("d") double d) {
+        url = "http://api.fixer.io/latest?base=USD";
 
-        JSONObject js = new JSONObject();
         {
+            js.put("result", cur.calculateEur(d, url));
 
-            js.put("result", doltoeur.calculateEur(d));
+            return Response.status(200).entity(js.toString()).build();
+        }
+    }
+
+    @Path("etd/{d}")
+    @GET
+    @Produces("application/json")
+    public Response etd (@PathParam("d") double d) {
+        url = "http://api.fixer.io/latest";
+
+        {
+            js.put("result", cur.calculateDol(d, url));
 
             return Response.status(200).entity(js.toString()).build();
         }

@@ -22,38 +22,57 @@ import javax.ws.rs.core.Response;
 public class Currency {
 
 
-    public double dte(double d) {
-        double doll = d;
-        double eur;
-        eur = d * 0.8;
-        return eur;
-    }
+    Client client = Client.create();
+    WebResource webResource;
+    ClientResponse response;
+    String output;
+    JSONObject obj;
+    double rates;
+    double result;
 
-    private Client client = Client.create();
-    private WebResource webResource;
-    private ClientResponse response;
-    private String output;
-    private JSONObject obj;
-    private double rates;
-    private double result;
 
-  //  @Test
-    private double getRatesEur (){
 
-        webResource = client.resource("http://api.fixer.io/latest?base=USD");
+
+    @Test
+    private double getRatesEur (String url){
+
+        webResource = client.resource(url);
         response = webResource.accept("application/json").get(ClientResponse.class);
         output = response.getEntity(String.class);
+        //System.out.println(output);
         obj = new JSONObject(output).getJSONObject("rates");
         rates = Math.round( obj.getDouble("EUR") * 100.0) / 100.0;
-        System.out.println(rates + 0);
+      //  System.out.println(rates + 2);
 
         return rates;
     }
 
-    public double calculateEur (double cur){
+    public double calculateEur (double cur,String url ){
 
-         result = cur * getRatesEur();
+         result = cur * getRatesEur(url);
          return result;
+    }
+
+      @Test
+       private double getRatesDoll (String url){
+
+
+          webResource = client.resource(url);
+          response = webResource.accept("application/json").get(ClientResponse.class);
+          output = response.getEntity(String.class);
+         // System.out.println(output);
+          obj = new JSONObject(output).getJSONObject("rates");
+          rates = Math.round( obj.getDouble("USD") * 100.0) / 100.0;
+         // System.out.println(rates);
+
+
+        return rates;
+    }
+
+    public double calculateDol (double cur,String url ){
+
+        result = cur * getRatesDoll(url);
+        return result;
     }
 }
 

@@ -21,9 +21,21 @@ hello
                 document.getElementById("resultArea").innerHTML = "eur = " + data.result;
             })
         });
+
+        $("#filter1").click(function(){
+            var amountToConvert = $('#currencyToConvert').val();
+            var exchangeAPI = "http://localhost:8080/currency/rest/converter/etd/" + amountToConvert;
+            $.getJSON(exchangeAPI, function(data){
+                document.getElementById("resultArea").innerHTML = "usd = " + data.result;
+            })
+        });
     });
 </script>
-<input type="button" id="filter" name="filter" value="Filter" />
+<input type="button" id="filter" name="filter" value="EUR" />
+<input type="button" id="filter1" name="filter1" value="USD" />
+
+
+
 
 
 </body>

@@ -14,7 +14,7 @@ hello
 <input type="text" placeholder="enter currency" id="currencyToConvert"/>
 <script>
     $(function(){
-        $("#filter").click(function(){
+        $("#EUR").click(function(){
             var amountToConvert = $('#currencyToConvert').val();
             var exchangeAPI = "http://localhost:8080/currency/rest/converter/dte/" + amountToConvert;
             $.getJSON(exchangeAPI, function(data){
@@ -22,7 +22,7 @@ hello
             })
         });
 
-        $("#filter1").click(function(){
+        $("#USD").click(function(){
             var amountToConvert = $('#currencyToConvert').val();
             var exchangeAPI = "http://localhost:8080/currency/rest/converter/etd/" + amountToConvert;
             $.getJSON(exchangeAPI, function(data){
@@ -31,8 +31,8 @@ hello
         });
     });
 </script>
-<input type="button" id="filter" name="filter" value="EUR" />
-<input type="button" id="filter1" name="filter1" value="USD" />
+<input type="button" id="EUR" name="EUR" value="EUR" />
+<input type="button" id="USD" name="USD" value="USD" />
 
 
 

@@ -39,7 +39,7 @@ public class controllerCurrency {
         url = "http://api.fixer.io/latest";
 
         {
-            js.put("result", cur.calculateDol(d, url));
+            js.put("result", cur.calculateEur(d, url));
 
             return Response.status(200).entity(js.toString()).build();
         }

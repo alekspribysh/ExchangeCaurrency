@@ -20,10 +20,10 @@ public class Currency {
     private WebResource webResource;
     private ClientResponse response;
     private String output;
-   // private JSONObject obj;
+    private JSONObject obj;
     private double rates;
     private double result;
-
+    //private String url;
 
 
 
@@ -32,13 +32,13 @@ public class Currency {
         webResource = client.resource(url);
         response = webResource.accept("application/json").get(ClientResponse.class);
         output = response.getEntity(String.class);
-        JSONObject obj = new JSONObject(output).getJSONObject("rates");
+        obj = new JSONObject(output).getJSONObject("rates");
         return obj;
     }
 
     public double calculateEur(double cur, String url) {
 
-        result = cur * getRates(url, getJSRates(url));
+        result = cur * getRates(url, getJSRates(url) );
         return result;
     }
 

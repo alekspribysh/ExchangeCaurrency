@@ -34,7 +34,9 @@ public class filterLogin implements javax.servlet.Filter {
         }
 
         else {
-            //resp.
+            RequestDispatcher dispatcher =
+                    req.getRequestDispatcher("/converter.html");
+            dispatcher.forward( req, resp);
         }
     }
 
